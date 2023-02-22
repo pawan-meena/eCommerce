@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/admin', [Admin::class,'login']);
+Route::post('/admin/loginsubmit', [Admin::class,'loginsubmit']);
+
+
+Route::middleware(['Admin'])->group(function () {
+    Route::view('/', 'welcome');
 });
